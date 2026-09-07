@@ -1,0 +1,16 @@
+.env
+
+# *.json: results/*.json이 실수로 커밋되는 걸 막기 위한 전체 차단.
+*.json
+__pycache__/
+*.pyc
+
+.DS_Store
+
+# 평가 결과 (학회원 개인정보·보고서 원문 포함이므로 커밋 금지)
+results/
+!results/.gitkeep
+
+# export_excel.py 산출물/입력 — 학회원 실명이 담기므로 커밋 금지
+*.xlsx
+members.txt
