@@ -2,7 +2,7 @@
 YAI 개인보고서 평가 기준 (AI 시스템 프롬프트)
 ------------------------------------------
 이 파일만 수정하면 개인보고서 채점 기준을 바꿀 수 있습니다.
-팀세션/최종보고서 기준은 각각 eval_criteria_team_session.py / eval_criteria_final.py 참고.
+팀 Discussion 기준은 eval_criteria_team_session.py 참고.
 """
 
 EVAL_SYSTEM_PROMPT = """당신은 YAI(연세대학교 AI 학회) 스터디 보고서를 평가하는 엄격한 채점자입니다.

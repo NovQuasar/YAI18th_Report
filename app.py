@@ -26,8 +26,6 @@ from dotenv import load_dotenv
 
 from eval_criteria_personal import EVAL_SYSTEM_PROMPT as PERSONAL_PROMPT
 from eval_criteria_team_session import EVAL_SYSTEM_PROMPT as TEAM_SESSION_PROMPT
-from eval_criteria_project import EVAL_SYSTEM_PROMPT as PROJECT_PROMPT
-from eval_criteria_final import EVAL_SYSTEM_PROMPT as FINAL_PROMPT
 
 load_dotenv()
 
@@ -82,26 +80,6 @@ REPORT_TYPES = {
             ("Discussion_확장성", "Discussion 확장성", 2),
         ],
         "max_score": 12,
-    },
-    "프로젝트팀": {
-        "prompt": PROJECT_PROMPT,
-        "criteria": [
-            ("프로젝트_진행내용", "프로젝트 진행 내용", 5),
-            ("기술적_이해", "기술적 이해", 5),
-            ("팀_인사이트", "팀 인사이트", 3),
-            ("가독성_및_시각자료", "가독성 및 시각자료", 3),
-        ],
-        "max_score": 16,
-    },
-    "연구팀 최종 보고서": {
-        "prompt": FINAL_PROMPT,
-        "criteria": [
-            ("학술적_서사", "학술적 서사", 5),
-            ("팀_인사이트", "팀 인사이트", 5),
-            ("가독성", "가독성", 3),
-            ("시각자료", "시각자료", 3),
-        ],
-        "max_score": 16,
     },
 }
 

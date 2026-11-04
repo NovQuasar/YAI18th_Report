@@ -36,7 +36,7 @@ streamlit run app.py
 
 `app.py` 단일 파일 Streamlit 앱:
 
-1. **입력 UI**: `st.selectbox`(AI 제공자: OpenRouter/Gemini — `.env`에 키가 있는 제공자만 노출), `st.text_input`(학회원 이름), `st.number_input`(주차), `st.text_input`(팀 이름), `st.selectbox`(보고서 종류: 개인 보고서/팀 Discussion/프로젝트팀/연구팀 최종 보고서), `st.number_input`(이미지 개수), `st.text_area`(본문).
+1. **입력 UI**: `st.selectbox`(AI 제공자: OpenRouter/Gemini — `.env`에 키가 있는 제공자만 노출), `st.text_input`(학회원 이름), `st.number_input`(주차), `st.text_input`(팀 이름), `st.selectbox`(보고서 종류: 개인 보고서/팀 Discussion), `st.number_input`(이미지 개수), `st.text_area`(본문).
 2. **AI 평가** (`evaluate`): 선택된 제공자에 따라 `evaluate_openrouter` 또는 `evaluate_gemini`로 위임.
    - `evaluate_openrouter`: `requests`로 OpenRouter 엔드포인트(`https://openrouter.ai/api/v1/chat/completions`)에 직접 POST. 모델은 `OPENROUTER_MODEL`(기본 `anthropic/claude-sonnet-4.5`).
    - `evaluate_gemini`: `requests`로 Gemini `generateContent` 엔드포인트(`https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent`)에 POST. 모델은 `GEMINI_MODEL`(기본 `gemini-3.6-flash`). `usageMetadata`를 OpenRouter의 `usage` 형태(`prompt_tokens`/`completion_tokens`/`total_tokens`)로 정규화하며, `cost`는 Gemini 응답에 없으므로 `-`로 표시.
@@ -50,8 +50,6 @@ streamlit run app.py
 - **채점 기준 파일**: `app.py`의 `REPORT_TYPES` 딕셔너리가 보고서 종류 ↔ `eval_criteria_*.py` 파일 ↔ 채점 항목(JSON 키/라벨/만점)을 매핑한다.
   - `eval_criteria_personal.py` → 개인 보고서 (이해도/가독성/시각자료/토론, 16점)
   - `eval_criteria_team_session.py` → 팀 Discussion (팀세션 진행 내용/Discussion 과정/Discussion 확장성, 12점)
-  - `eval_criteria_project.py` → 프로젝트팀 (프로젝트 진행 내용/기술적 이해/팀 인사이트/가독성 및 시각자료, 16점)
-  - `eval_criteria_final.py` → 연구팀 최종 보고서 (학술적 서사/팀 인사이트/가독성/시각자료, 16점)
 
   새 보고서 종류를 추가하거나 채점 항목을 바꾸려면 해당 `eval_criteria_*.py`의 `EVAL_SYSTEM_PROMPT`와 `app.py`의 `REPORT_TYPES` 항목(`criteria`, `max_score`)을 함께 수정해야 한다.
 - **이미지 처리**: 이미지 파일 자체는 AI에게 전달되지 않는다. 사용자가 UI에서 입력한 **개수**만 `[이미지 개수: N개]` 형태로 프롬프트에 포함되며, 채점 기준(`eval_criteria_personal.py`)도 개수 기반이다.

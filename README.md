@@ -10,7 +10,7 @@
 UI에서 AI 제공자(OpenRouter/Gemini) 선택 → 보고서 종류/이미지 개수/본문 입력 → AI 채점 → results/ 폴더에 저장
 ```
 
-1. **입력**: UI에서 AI 제공자(OpenRouter 또는 Gemini, `.env`에 키가 있는 것만 선택 가능), 학회원 이름, 주차, 팀 이름, 보고서 종류(개인 보고서 / 팀 Discussion / 프로젝트팀 / 연구팀 최종 보고서), 이미지 개수, 보고서 본문을 입력
+1. **입력**: UI에서 AI 제공자(OpenRouter 또는 Gemini, `.env`에 키가 있는 것만 선택 가능), 학회원 이름, 주차, 팀 이름, 보고서 종류(개인 보고서 / 팀 Discussion), 이미지 개수, 보고서 본문을 입력
 2. **AI 채점**: 입력한 텍스트를 선택한 제공자(OpenRouter 경유 Claude, 또는 Gemini API 직접 호출)에 전달해 보고서 종류별 채점 항목을 JSON으로 채점
 3. **결과 저장**: 채점 결과를 `results/` 폴더에 JSON(데이터용) + Markdown(가독용) 두 형식으로 저장
 
@@ -63,8 +63,6 @@ streamlit run app.py
 |---|---|
 | `eval_criteria_personal.py` | 개인 보고서 |
 | `eval_criteria_team_session.py` | 팀 Discussion |
-| `eval_criteria_project.py` | 프로젝트팀 |
-| `eval_criteria_final.py` | 연구팀 최종 보고서 |
 
 개인 보고서 채점 항목 (총 16점):
 
@@ -77,10 +75,6 @@ streamlit run app.py
 | **총점** | **16점** | |
 
 팀 Discussion 채점 항목 (총 12점): 팀세션 진행 내용(5) / Discussion 과정(5) / Discussion 확장성(2)
-
-프로젝트팀 채점 항목 (총 16점): 프로젝트 진행 내용(5) / 기술적 이해(5) / 팀 인사이트(3) / 가독성 및 시각자료(3)
-
-연구팀 최종 보고서 채점 항목 (총 16점): 학술적 서사(5) / 팀 인사이트(5) / 가독성(3) / 시각자료(3)
 
 각 파일의 `EVAL_SYSTEM_PROMPT`를 수정하면 채점 기준을 바꿀 수 있고, 항목 구성 자체를 바꾸려면 `app.py`의 `REPORT_TYPES`도 함께 수정해야 합니다.
 
